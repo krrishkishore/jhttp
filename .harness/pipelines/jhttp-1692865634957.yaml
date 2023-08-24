@@ -22,10 +22,26 @@ pipeline:
                   identifier: build_java_app
                   name: Build Java App
                   spec:
+                    connectorRef: account.harnessImage
+                    image: maven:3.8-jdk-11
                     shell: Sh
                     command: |-
                       echo "Welcome to Harness CI"
-                      mvn -B package --file pom.xml
+                      mvn clean package dependency:copy-dependencies
+              - step:
+                  type: Run
+                  name: check dependencies
+                  identifier: check_dependencies
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: maven:3.8-jdk-11
+                    shell: Sh
+                    command: mvn dependency-check:check -U -DskipTests
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths:
+                          - /harness/target/*.xml
           platform:
             arch: Amd64
             os: Linux
