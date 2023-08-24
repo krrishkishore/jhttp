@@ -54,6 +54,20 @@ pipeline:
                       spec:
                         paths:
                           - target/surefire-reports/*.xml
+              - step:
+                  type: RunTests
+                  name: RunTests_1
+                  identifier: RunTests_1
+                  spec:
+                    language: Java
+                    buildTool: Maven
+                    args: test
+                    runOnlySelectedTests: false
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths:
+                          - "**/*.xml"
           platform:
             arch: Amd64
             os: Linux
