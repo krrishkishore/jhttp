@@ -29,49 +29,18 @@ pipeline:
                       echo "Welcome to Harness CI"
                       mvn clean package dependency:copy-dependencies
               - step:
-                  type: Run
-                  name: check dependencies
-                  identifier: check_dependencies
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
                   spec:
-                    connectorRef: account.harnessImage
-                    image: maven:3.8-jdk-11
-                    shell: Sh
-                    command: mvn org.owasp:dependency-check-maven:check -U -DskipTests
-                    reports:
-                      type: JUnit
-                      spec:
-                        paths:
-                          - /harness/target/*.xml
-              - step:
-                  type: Run
-                  name: run test
-                  identifier: run_test
-                  spec:
-                    shell: Sh
-                    command: mvn test
-                    reports:
-                      type: JUnit
-                      spec:
-                        paths:
-                          - target/surefire-reports/*.xml
-              - step:
-                  type: RunTests
-                  name: RunTests_1
-                  identifier: RunTests_1
-                  spec:
-                    language: Java
-                    buildTool: Maven
-                    args: test
-                    runOnlySelectedTests: false
-                    reports:
-                      type: JUnit
-                      spec:
-                        paths:
-                          - "**/*.xml"
+                    connectorRef: teseract
+                    repo: srveerla
+                    tags:
+                      - latest
           platform:
-            arch: Amd64
             os: Linux
+            arch: Amd64
           runtime:
-            spec: {}
             type: Cloud
+            spec: {}
         type: CI
