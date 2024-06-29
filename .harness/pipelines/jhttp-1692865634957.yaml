@@ -33,10 +33,10 @@ pipeline:
                   name: BuildAndPushDockerRegistry_1
                   identifier: BuildAndPushDockerRegistry_1
                   spec:
-                    connectorRef: dockerhub
-                    repo: sveerla/teseract
+                    connectorRef: testdemo
+                    repo: sveerla/demo
                     tags:
-                      - demo
+                      - latest
           platform:
             os: Linux
             arch: Amd64
