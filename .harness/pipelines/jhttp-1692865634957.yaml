@@ -34,7 +34,7 @@ pipeline:
                   identifier: BuildAndPushDockerRegistry_1
                   spec:
                     connectorRef: dockerhub
-                    repo: sveerla/demo
+                    repo: sveerla/teseract
                     tags:
                       - demo
           platform:
