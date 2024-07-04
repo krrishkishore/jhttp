@@ -27,20 +27,18 @@ pipeline:
                   timeout: ""
                   type: Run
               - step:
-                  identifier: dockerbuild
-                  name: docker_build
+                  identifier: build_java_app
+                  name: Build Java App
                   spec:
-                    caching: true
-                    connectorRef: <+input>
-                    repo: hello/world
-                    tags:
-                      - latest
-                  timeout: ""
-                  type: BuildAndPushDockerRegistry
+                    shell: Sh
+                    command: |-
+                      echo "Welcome to Harness CI inside build_java_app"
+                      mvn -B package --file pom.xml
+                  type: Run
           platform:
-            arch: Amd64
             os: Linux
+            arch: Amd64
           runtime:
-            spec: {}
             type: Cloud
+            spec: {}
         type: CI
