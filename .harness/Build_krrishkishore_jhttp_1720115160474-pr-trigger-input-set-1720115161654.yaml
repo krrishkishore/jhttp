@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_krrishkishore_jhttp_1720115160474-pr-trigger-input-set
+  identifier: Build_krrishkishore_jhttp_1720115160474prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: jhttp
+  pipeline:
+    identifier: Build_krrishkishore_jhttp_1720115160474
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
